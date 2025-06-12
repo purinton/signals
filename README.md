@@ -1,4 +1,6 @@
-# signals
+# @purinton/signals
+
+[![npm version](https://img.shields.io/npm/v/@purinton/signals.svg)](https://www.npmjs.com/package/@purinton/signals) [![license](https://img.shields.io/github/license/purinton/signals.svg)](LICENSE) [![build status](https://github.com/purinton/signals/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/signals/actions)
 
 A simple utility to register graceful shutdown handlers for Node.js processes, supporting both ESM and CommonJS.
 
