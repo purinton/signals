@@ -2,7 +2,7 @@
     "name": "@purinton/signals",
     "type": "module",
     "version": "1.0.0",
-    "description": "A Node.js signals.",
+    "description": "Graceful shutdown signal handler utility for Node.js (ESM and CommonJS)",
     "main": "index.cjs",
     "module": "index.mjs",
     "types": "index.d.ts",
@@ -29,22 +29,20 @@
     },
     "keywords": [
         "nodejs",
-        "module",
-        "template",
-        "boilerplate",
-        "javascript",
-        "typescript",
+        "signals",
+        "shutdown",
+        "graceful shutdown",
+        "process",
+        "handler",
+        "utility",
         "esm",
         "commonjs",
         "cjs",
         "package",
         "library",
         "npm",
-        "testing",
-        "jest",
-        "ci",
-        "continuous-integration",
-        "node"
+        "node",
+        "logger"
     ],
     "author": "Russell Purinton <russell@purinton.us>",
     "license": "MIT",
@@ -62,5 +60,8 @@
             "**/?(*.)+(spec|test).mjs",
             "**/?(*.)+(spec|test).cjs"
         ]
+    },
+    "dependencies": {
+        "@purinton/log": "^1.0.3"
     }
 }
