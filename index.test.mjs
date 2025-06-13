@@ -10,7 +10,7 @@ describe('registerSignals (ESM)', () => {
       exit: jest.fn()
     };
     mockLogger = {
-      info: jest.fn(),
+      debug: jest.fn(),
       warn: jest.fn(),
       error: jest.fn()
     };
