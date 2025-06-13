@@ -1,5 +1,4 @@
-// Type declarations placeholder
-export function myModule(): string;
+// Type declarations for signals
 
 /**
  * Sets up shutdown handlers for the process.
@@ -9,11 +8,15 @@ export function myModule(): string;
  * @param options.signals Signals to listen for.
  * @returns An object with shutdown and getShuttingDown functions.
  */
-export function registerSignals(options?: {
+export interface RegisterSignalsOptions {
     processObj?: NodeJS.Process;
     logger?: { info: Function; warn: Function; error: Function };
     signals?: string[];
-}): {
+}
+
+export function registerSignals(options?: RegisterSignalsOptions): {
     shutdown: (signal: string) => Promise<void>;
     getShuttingDown: () => boolean;
 };
+
+export default registerSignals;

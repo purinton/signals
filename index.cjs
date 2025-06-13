@@ -36,3 +36,4 @@ function registerSignals({
 }
 
 module.exports = registerSignals;
+module.exports.default = registerSignals;

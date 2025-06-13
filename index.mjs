@@ -34,3 +34,5 @@ export const registerSignals = ({
     });
     return { shutdown, getShuttingDown };
 };
+
+export default registerSignals;
