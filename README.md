@@ -1,8 +1,6 @@
-# @purinton/signals
+# [![Purinton Dev](https://purinton.us/logos/brand.png)](https://discord.gg/QSBxQnX7PF)
 
-[![npm version](https://img.shields.io/npm/v/@purinton/signals.svg)](https://www.npmjs.com/package/@purinton/signals)
-[![license](https://img.shields.io/github/license/purinton/signals.svg)](LICENSE)
-[![build status](https://github.com/purinton/signals/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/signals/actions)
+## @purinton/signals [![npm version](https://img.shields.io/npm/v/@purinton/signals.svg)](https://www.npmjs.com/package/@purinton/signals)[![license](https://img.shields.io/github/license/purinton/signals.svg)](LICENSE)[![build status](https://github.com/purinton/signals/actions/workflows/nodejs.yml/badge.svg)](https://github.com/purinton/signals/actions)
 
 > Graceful shutdown signal handler utility for Node.js (ESM and CommonJS)
 
@@ -10,26 +8,14 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
   - [ESM Example](#esm-example)
   - [CommonJS Example](#commonjs-example)
 - [API](#api)
-  - [registerSignals(options?)](#registersignalsoptions)
 - [TypeScript](#typescript)
-- [Testing](#testing)
-- [Contributing](#contributing)
 - [License](#license)
-
----
-
-## Overview
-
-**@purinton/signals** is a lightweight utility for registering graceful shutdown handlers in Node.js applications. It supports both ESM and CommonJS, and allows you to easily handle process signals like `SIGTERM`, `SIGINT`, and `SIGHUP` with a customizable logger and process object.
-
----
 
 ## Features
 
@@ -39,27 +25,26 @@
 - TypeScript type definitions included
 - Well-tested with Jest
 
----
-
 ## Installation
 
 ```bash
 npm install @purinton/signals
 ```
 
----
-
 ## Usage
 
 ### ESM Example
 
 ```js
-import { registerSignals } from '@purinton/signals';
+// Example for ESM (module JS) usage
+import registerSignalsDefault, { registerSignals } from '@purinton/signals';
 
+// Both default and named export are available:
 const { shutdown, getShuttingDown } = registerSignals();
+// or
+const { shutdown: shutdown2, getShuttingDown: getShuttingDown2 } = registerSignalsDefault();
 
 console.log('Shutdown handlers registered.');
-
 // To manually trigger shutdown (for demonstration):
 // shutdown('SIGTERM');
 ```
@@ -67,21 +52,22 @@ console.log('Shutdown handlers registered.');
 ### CommonJS Example
 
 ```js
-const registerSignals = require('@purinton/signals');
+// Example for CommonJS usage
+const registerSignalsModule = require('@purinton/signals');
 
-const { shutdown, getShuttingDown } = registerSignals();
+// Both default and named export are available:
+const { shutdown, getShuttingDown } = registerSignalsModule();
+// or
+const { shutdown: shutdown2, getShuttingDown: getShuttingDown2 } = registerSignalsModule.default();
 
 console.log('Shutdown handlers registered.');
-
 // To manually trigger shutdown (for demonstration):
 // shutdown('SIGTERM');
 ```
 
----
-
 ## API
 
-### `registerSignals(options?)`
+### registerSignals(options?)
 
 Registers shutdown handlers for the specified signals.
 
@@ -98,38 +84,32 @@ An object with:
 - `shutdown(signal: string): Promise<void>` — Manually trigger shutdown logic.
 - `getShuttingDown(): boolean` — Returns whether shutdown is in progress.
 
----
-
 ## TypeScript
 
-Type definitions are included. Example:
+Type definitions are included:
 
 ```ts
-import { registerSignals } from '@purinton/signals';
+import registerSignalsDefault, { registerSignals } from '@purinton/signals';
 
 const { shutdown, getShuttingDown } = registerSignals();
+// or
+const { shutdown: shutdown2, getShuttingDown: getShuttingDown2 } = registerSignalsDefault();
 ```
 
----
+## Support
 
-## Testing
+For help, questions, or to chat with the author and community, visit:
 
-This package uses [Jest](https://jestjs.io/) for testing. To run tests:
+[![Discord](https://purinton.us/logos/discord_96.png)](https://discord.gg/QSBxQnX7PF)[![Purinton Dev](https://purinton.us/logos/purinton_96.png)](https://discord.gg/QSBxQnX7PF)
 
-```bash
-npm test
-```
-
----
-
-## Contributing
-
-Contributions, issues, and feature requests are welcome!  
-Feel free to check the [issues page](https://github.com/purinton/signals/issues).
-
----
+**[Purinton Dev on Discord](https://discord.gg/QSBxQnX7PF)**
 
 ## License
 
-MIT License  
-Copyright (c) 2025 Russell Purinton
+[MIT © 2025 Russell Purinton](LICENSE)
+
+## Links
+
+- [GitHub](https://github.com/purinton/signals)
+- [npm](https://www.npmjs.com/package/@purinton/signals)
+- [Discord](https://discord.gg/QSBxQnX7PF)
