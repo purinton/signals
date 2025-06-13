@@ -36,15 +36,12 @@ npm install @purinton/signals
 ### ESM Example
 
 ```js
-// Example for ESM (module JS) usage
-import registerSignalsDefault, { registerSignals } from '@purinton/signals';
-
-// Both default and named export are available:
+// Example usage for ESM
+import registerSignals from './index.mjs';
 const { shutdown, getShuttingDown } = registerSignals();
-// or
-const { shutdown: shutdown2, getShuttingDown: getShuttingDown2 } = registerSignalsDefault();
 
 console.log('Shutdown handlers registered.');
+
 // To manually trigger shutdown (for demonstration):
 // shutdown('SIGTERM');
 ```
@@ -52,17 +49,15 @@ console.log('Shutdown handlers registered.');
 ### CommonJS Example
 
 ```js
-// Example for CommonJS usage
-const registerSignalsModule = require('@purinton/signals');
-
-// Both default and named export are available:
-const { shutdown, getShuttingDown } = registerSignalsModule();
-// or
-const { shutdown: shutdown2, getShuttingDown: getShuttingDown2 } = registerSignalsModule.default();
+// Example usage for CommonJS
+const registerSignals = require('./index.cjs');
+const { shutdown, getShuttingDown } = registerSignals();
 
 console.log('Shutdown handlers registered.');
+
 // To manually trigger shutdown (for demonstration):
 // shutdown('SIGTERM');
+
 ```
 
 ## API
