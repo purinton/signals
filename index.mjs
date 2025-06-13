@@ -21,7 +21,7 @@ export const registerSignals = ({
             return;
         }
         shuttingDown = true;
-        logger.info(`Received ${signal}. Shutting down gracefully...`);
+        logger.debug(`Received ${signal}. Shutting down gracefully...`);
         try {
             // Place for any async cleanup logic if needed
         } catch (err) {

@@ -35,7 +35,7 @@ describe('registerSignals (ESM)', () => {
     expect(getShuttingDown()).toBe(false);
     await shutdown('SIGTERM');
     expect(getShuttingDown()).toBe(true);
-    expect(mockLogger.info).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
     expect(mockProcess.exit).toHaveBeenCalledWith(0);
   });
 
@@ -44,7 +44,7 @@ describe('registerSignals (ESM)', () => {
     expect(getShuttingDown()).toBe(false);
     await shutdown('SIGTERM');
     expect(getShuttingDown()).toBe(true);
-    expect(mockLogger.info).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
+    expect(mockLogger.debug).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
     expect(mockProcess.exit).toHaveBeenCalledWith(0);
   });
 
