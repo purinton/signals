@@ -37,7 +37,8 @@ npm install @purinton/signals
 
 ```js
 import log from '@purinton/log';
-import registerSignals from '@purinton/signals';
+import registerSignals from '@purinton/signals'; // Default export
+// or: import { registerSignals } from '@purinton/signals';
 const { shutdown, getShuttingDown } = registerSignals({ log });
 ```
 
@@ -45,9 +46,12 @@ const { shutdown, getShuttingDown } = registerSignals({ log });
 
 ```js
 const log = require('@purinton/log');
-const registerSignals = require('@purinton/signals');
+const registerSignals = require('@purinton/signals'); // Default export
+// or: const { registerSignals } = require('@purinton/signals');
 const { shutdown, getShuttingDown } = registerSignals({ log });
 ```
+
+> **Note:** Both the default export and named export `registerSignals` are available in both ESM and CommonJS.
 
 ## API
 
@@ -73,11 +77,28 @@ An object with:
 Type definitions are included:
 
 ```ts
-import registerSignalsDefault, { registerSignals } from '@purinton/signals';
+import registerSignals, { RegisterSignalsOptions } from '@purinton/signals';
 
-const { shutdown, getShuttingDown } = registerSignals();
-// or
-const { shutdown: shutdown2, getShuttingDown: getShuttingDown2 } = registerSignalsDefault();
+// Optionally provide options
+const options: RegisterSignalsOptions = {
+  processObj: process, // optional, defaults to process
+  log: myLogger,       // optional, defaults to @purinton/log
+  signals: ['SIGTERM', 'SIGINT', 'SIGHUP'] // optional, defaults as shown
+};
+
+const { shutdown, getShuttingDown } = registerSignals(options);
+
+// Types:
+// interface RegisterSignalsOptions {
+//   processObj?: NodeJS.Process;
+//   log?: typeof log;
+//   signals?: string[];
+// }
+//
+// function registerSignals(options?: RegisterSignalsOptions): {
+//   shutdown: (signal: string) => Promise<void>;
+//   getShuttingDown: () => boolean;
+// };
 ```
 
 ## Support

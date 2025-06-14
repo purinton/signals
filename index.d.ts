@@ -1,4 +1,5 @@
 // Type declarations for signals
+import log from '@purinton/log';
 
 /**
  * Sets up shutdown handlers for the process.
@@ -10,7 +11,7 @@
  */
 export interface RegisterSignalsOptions {
     processObj?: NodeJS.Process;
-    log?: { debug: Function; info: Function; warn: Function; error: Function };
+    log?: typeof log;
     signals?: string[];
 }
 
