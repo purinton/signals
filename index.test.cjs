@@ -8,13 +8,13 @@ const defaultRegisterSignals = registerSignals.default || registerSignals;
 
 describe('registerSignals (CJS)', () => {
     let mockProcess;
-    let mockLogger;
+    let mocklog;
     beforeEach(() => {
         mockProcess = {
             on: jest.fn(),
             exit: jest.fn()
         };
-        mockLogger = {
+        mocklog = {
             debug: jest.fn(),
             warn: jest.fn(),
             error: jest.fn()
@@ -22,48 +22,48 @@ describe('registerSignals (CJS)', () => {
     });
 
     test('registers signal handlers (named export)', () => {
-        namedRegisterSignals({ processObj: mockProcess, logger: mockLogger });
+        namedRegisterSignals({ processObj: mockProcess, log: mocklog });
         expect(mockProcess.on).toHaveBeenCalledWith('SIGTERM', expect.any(Function));
         expect(mockProcess.on).toHaveBeenCalledWith('SIGINT', expect.any(Function));
         expect(mockProcess.on).toHaveBeenCalledWith('SIGHUP', expect.any(Function));
     });
 
     test('registers signal handlers (default export)', () => {
-        defaultRegisterSignals({ processObj: mockProcess, logger: mockLogger });
+        defaultRegisterSignals({ processObj: mockProcess, log: mocklog });
         expect(mockProcess.on).toHaveBeenCalledWith('SIGTERM', expect.any(Function));
         expect(mockProcess.on).toHaveBeenCalledWith('SIGINT', expect.any(Function));
         expect(mockProcess.on).toHaveBeenCalledWith('SIGHUP', expect.any(Function));
     });
 
     test('shutdown sets shuttingDown and calls exit (named export)', async () => {
-        const { shutdown, getShuttingDown } = namedRegisterSignals({ processObj: mockProcess, logger: mockLogger });
+        const { shutdown, getShuttingDown } = namedRegisterSignals({ processObj: mockProcess, log: mocklog });
         expect(getShuttingDown()).toBe(false);
         await shutdown('SIGTERM');
         expect(getShuttingDown()).toBe(true);
-        expect(mockLogger.debug).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
+        expect(mocklog.debug).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
         expect(mockProcess.exit).toHaveBeenCalledWith(0);
     });
 
     test('shutdown sets shuttingDown and calls exit (default export)', async () => {
-        const { shutdown, getShuttingDown } = defaultRegisterSignals({ processObj: mockProcess, logger: mockLogger });
+        const { shutdown, getShuttingDown } = defaultRegisterSignals({ processObj: mockProcess, log: mocklog });
         expect(getShuttingDown()).toBe(false);
         await shutdown('SIGTERM');
         expect(getShuttingDown()).toBe(true);
-        expect(mockLogger.debug).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
+        expect(mocklog.debug).toHaveBeenCalledWith('Received SIGTERM. Shutting down gracefully...');
         expect(mockProcess.exit).toHaveBeenCalledWith(0);
     });
 
     test('shutdown warns if already shutting down (named export)', async () => {
-        const { shutdown } = namedRegisterSignals({ processObj: mockProcess, logger: mockLogger });
+        const { shutdown } = namedRegisterSignals({ processObj: mockProcess, log: mocklog });
         await shutdown('SIGTERM');
         await shutdown('SIGTERM');
-        expect(mockLogger.warn).toHaveBeenCalledWith('Received SIGTERM again, but already shutting down.');
+        expect(mocklog.warn).toHaveBeenCalledWith('Received SIGTERM again, but already shutting down.');
     });
 
     test('shutdown warns if already shutting down (default export)', async () => {
-        const { shutdown } = defaultRegisterSignals({ processObj: mockProcess, logger: mockLogger });
+        const { shutdown } = defaultRegisterSignals({ processObj: mockProcess, log: mocklog });
         await shutdown('SIGTERM');
         await shutdown('SIGTERM');
-        expect(mockLogger.warn).toHaveBeenCalledWith('Received SIGTERM again, but already shutting down.');
+        expect(mocklog.warn).toHaveBeenCalledWith('Received SIGTERM again, but already shutting down.');
     });
 });

@@ -36,28 +36,17 @@ npm install @purinton/signals
 ### ESM Example
 
 ```js
-// Example usage for ESM
-import registerSignals from './index.mjs';
-const { shutdown, getShuttingDown } = registerSignals();
-
-console.log('Shutdown handlers registered.');
-
-// To manually trigger shutdown (for demonstration):
-// shutdown('SIGTERM');
+import log from '@purinton/log';
+import registerSignals from '@purinton/signals';
+const { shutdown, getShuttingDown } = registerSignals({ log });
 ```
 
 ### CommonJS Example
 
 ```js
-// Example usage for CommonJS
-const registerSignals = require('./index.cjs');
-const { shutdown, getShuttingDown } = registerSignals();
-
-console.log('Shutdown handlers registered.');
-
-// To manually trigger shutdown (for demonstration):
-// shutdown('SIGTERM');
-
+const log = require('@purinton/log');
+const registerSignals = require('@purinton/signals');
+const { shutdown, getShuttingDown } = registerSignals({ log });
 ```
 
 ## API
@@ -69,7 +58,7 @@ Registers shutdown handlers for the specified signals.
 #### Options
 
 - `processObj` (default: `process`): The process object to attach handlers to.
-- `logger` (default: `@purinton/log`): Logger for output. Should have `info`, `warn`, and `error` methods.
+- `log` (default: `@purinton/log`): Logger for output. Should have `debug`, `info`, `warn`, and `error` methods.
 - `signals` (default: `[ 'SIGTERM', 'SIGINT', 'SIGHUP' ]`): Array of signals to listen for.
 
 #### Returns

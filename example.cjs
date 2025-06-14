@@ -1,8 +1,4 @@
 // Example usage for CommonJS
-const registerSignals = require('./index.cjs');
-const { shutdown, getShuttingDown } = registerSignals();
-
-console.log('Shutdown handlers registered.');
-
-// To manually trigger shutdown (for demonstration):
-// shutdown('SIGTERM');
+const log = require('@purinton/log');
+const registerSignals = require('@purinton/signals');
+const { shutdown, getShuttingDown } = registerSignals({ log });
