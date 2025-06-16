@@ -13,6 +13,8 @@ export interface RegisterSignalsOptions {
     processObj?: NodeJS.Process;
     log?: typeof log;
     signals?: string[];
+    /** Optional async function called during shutdown with the signal */
+    shutdownHook?: (signal: string) => Promise<void>;
 }
 
 export function registerSignals(options?: RegisterSignalsOptions): {

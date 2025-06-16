@@ -61,4 +61,18 @@ describe('registerSignals (ESM)', () => {
     await shutdown('SIGTERM');
     expect(mocklog.warn).toHaveBeenCalledWith('Received SIGTERM again, but already shutting down.');
   });
+
+  test('shutdown invokes hooks for named export', async () => {
+    const hook = jest.fn(async (signal) => {});
+    const { shutdown } = registerSignalsNamed({ processObj: mockProcess, log: mocklog, shutdownHook: hook });
+    await shutdown('SIGINT');
+    expect(hook).toHaveBeenCalledWith('SIGINT');
+  });
+
+  test('shutdown invokes hooks for default export', async () => {
+    const hook = jest.fn(async (signal) => {});
+    const { shutdown } = registerSignalsDefault({ processObj: mockProcess, log: mocklog, shutdownHook: hook });
+    await shutdown('SIGHUP');
+    expect(hook).toHaveBeenCalledWith('SIGHUP');
+  });
 });
